@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-export default function BasicTable(props) {
+export default function TableMui(props) {
   const rows = props.appCoinsData;
   const classes = useStyles();
 
@@ -52,12 +52,21 @@ export default function BasicTable(props) {
                 {row.name}
               </TableCell>
               <TableCell>{row.symbol}</TableCell>
-              <TableCell>{row.current_price}</TableCell>
-              <TableCell>{row.price_change_percentage_24h}</TableCell>
-              <TableCell>{row.total_volume.toLocaleString()}</TableCell>
-              <TableCell>{row.market_cap.toLocaleString()}</TableCell>
-              <TableCell>{row.total_supply}</TableCell>
-              <TableCell>{row.max_supply}</TableCell>
+              <TableCell>${row.current_price}</TableCell>
+              <TableCell>${row.price_change_percentage_24h}</TableCell>
+              <TableCell>${row.total_volume.toLocaleString()}</TableCell>
+              <TableCell>${row.market_cap.toLocaleString()}</TableCell>
+
+              {row.total_supply ? (
+                <TableCell>${row.total_supply.toLocaleString()}</TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )}
+              {row.max_supply ? (
+                <TableCell>${row.max_supply.toLocaleString()}</TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
