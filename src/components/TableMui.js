@@ -49,14 +49,29 @@ export default function TableMui(props) {
 
             <TableCell>Total Supply</TableCell>
             <TableCell>Max Supply</TableCell>
+            <TableCell>
+              Middle term inflation - Total Supply/Circulating Supply (>1 is ICO
+              holder=the greater the worst)
+            </TableCell>
+
+            <TableCell>
+              Long term inflation - Max Supply/Circulating Supply
+              (0=inflation|1=good|>1=dump adjustment, the higher the worst)
+            </TableCell>
+            <TableCell>
+              Max long term inflation - Max Supply/Total Supply
+              (0=inflation|1=good|>1=dump adjustment, the higher the worst)
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
+              {/* <TableCell component="th" scope="row">
+                <img src={row.image} alt="crypto" />{" "}
+              </TableCell> */}
+              <TableCell>{row.name}</TableCell>
+
               <TableCell>{row.symbol}</TableCell>
               <TableCell>${row.current_price}</TableCell>
               <TableCell>${row.price_change_percentage_24h}</TableCell>
@@ -88,6 +103,23 @@ export default function TableMui(props) {
               ) : (
                 <TableCell>{"∞"}</TableCell>
               )} */}
+              {row.total_supply ? (
+                <TableCell>
+                  {row.total_supply / row.circulating_supply}
+                </TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )}
+              {row.max_supply ? (
+                <TableCell>{row.max_supply / row.circulating_supply}</TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )}
+                            {row.max_supply ? (
+                <TableCell>{row.max_supply / row.total_supply}</TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
