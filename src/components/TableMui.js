@@ -29,7 +29,11 @@ const useStyles = makeStyles({
 export default function TableMui(props) {
   const rows = props.appCoinsData;
   const classes = useStyles();
-
+  //MaxS/AvS(0=inflation|1=good|>1=dump ajustment, the higher the worst)
+  // const maxLongTermInflation = props.appCoinsData.max_supply
+  // console.log('max supply: ', props.appCoinsData.max_supply, 'circulating supply: props.appCoinsData.circulating_supply',)
+  // const max_long_term_inflation = props.appCoinsData.max_supply  / props.appCoinsData.circulating_supply
+  // let max_long_term_inflation;
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -41,6 +45,8 @@ export default function TableMui(props) {
             <TableCell>Price change % 24h</TableCell>
             <TableCell>Volume</TableCell>
             <TableCell>Market Cap</TableCell>
+            <TableCell>Circulating Supply</TableCell>
+
             <TableCell>Total Supply</TableCell>
             <TableCell>Max Supply</TableCell>
           </TableRow>
@@ -56,6 +62,7 @@ export default function TableMui(props) {
               <TableCell>${row.price_change_percentage_24h}</TableCell>
               <TableCell>${row.total_volume.toLocaleString()}</TableCell>
               <TableCell>${row.market_cap.toLocaleString()}</TableCell>
+              <TableCell>${row.circulating_supply.toLocaleString()}</TableCell>
 
               {row.total_supply ? (
                 <TableCell>${row.total_supply.toLocaleString()}</TableCell>
@@ -67,6 +74,20 @@ export default function TableMui(props) {
               ) : (
                 <TableCell>{"∞"}</TableCell>
               )}
+
+              {/* How what I want to do here is to get two values and divide one by the other, inside .map() and JSX */}
+              {/* {function maxInflation() {
+                let maxLongTermInflation =
+                  row.max_supply / row.circulating_supply;
+                return maxLongTermInflation;
+              }}
+              {console.log(maxInflation())}
+
+              {row.max_supply ? (
+                <TableCell>{maxInflation()}</TableCell>
+              ) : (
+                <TableCell>{"∞"}</TableCell>
+              )} */}
             </TableRow>
           ))}
         </TableBody>
